@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import styled from 'styled-components';
+import SearchBar from "./views/search-bar/SearchBar";
 
 const AppContainer = styled.div`
   text-align: center;
@@ -25,7 +26,7 @@ const AppLogo = styled.img`
 `
 
 const AppHeader = styled.header`
-  background-color: #282c34;
+  background-color: #DEC28A;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -43,6 +44,7 @@ function App() {
   return (
     <AppContainer>
       <AppHeader>
+        <SearchBar />
         <AppLogo src={logo} alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
