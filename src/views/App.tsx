@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import styled from 'styled-components';
-import SearchBar from "./views/search-bar/SearchBar";
+import SearchBar from "./search-bar/SearchBar";
 
 const AppContainer = styled.div`
   text-align: center;
