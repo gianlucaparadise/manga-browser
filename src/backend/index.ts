@@ -1,0 +1,1 @@
+export { getCharacterPictures } from "./character-api"

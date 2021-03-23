@@ -1,0 +1,1 @@
+export const JIKAN_V3_BASEURL = "https://api.jikan.moe/v3"
