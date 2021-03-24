@@ -1,28 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import styled from 'styled-components';
 import SearchBar from "./search-bar/SearchBar";
+import CharactersShowcase from "./characters-showcase/CharactersShowcase";
 
 const AppContainer = styled.div`
   text-align: center;
 `
 
-const AppLogo = styled.img`
-  height: 40vmin;
-  pointer-events: none;
-
-  @media (prefers-reduced-motion: no-preference) {
-    animation: App-logo-spin infinite 20s linear;
-  }
-
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+const MangaCharacters = styled(CharactersShowcase)`
+  /* margin: calc(10px + 5vmin); */
 `
 
 const AppHeader = styled.header`
@@ -36,26 +22,12 @@ const AppHeader = styled.header`
   color: white;
 `
 
-const AppLink = styled.a`
-  color: #61dafb;
-`
-
 function App() {
   return (
     <AppContainer>
       <AppHeader>
         <SearchBar />
-        <AppLogo src={logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <AppLink
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </AppLink>
+        <MangaCharacters />
       </AppHeader>
     </AppContainer>
   );
