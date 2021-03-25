@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Input } from '@material-ui/core';
+import { FunctionComponent } from "react";
 
 const SearchBarContainer = styled.div`
     width: 80vw;
@@ -10,10 +11,22 @@ const InputSearch = styled(Input)`
     width: 100%;
 `
 
-const SearchBar = function () {
+interface Props {
+    onChange?: (query: string) => void;
+    query?: string;
+}
+
+const SearchBar: FunctionComponent<Props> = function (props) {
+
+    const onInputChanged = (value: string) => {
+        if (props.onChange) {
+            props.onChange(value)
+        }
+    }
+
     return (
         <SearchBarContainer>
-            <InputSearch type="search" placeholder="Search manga..."/>
+            <InputSearch type="search" placeholder="Search manga..." value={props.query} onChange={e => onInputChanged(e.target.value)} />
         </SearchBarContainer>
     );
 }

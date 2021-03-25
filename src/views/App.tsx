@@ -23,10 +23,14 @@ const AppHeader = styled.header`
 `
 
 function App() {
+  const onSearchChanged = (query: string) => {
+    console.log(query)
+  }
+
   return (
     <AppContainer>
       <AppHeader>
-        <SearchBar />
+        <SearchBar onChange={onSearchChanged} />
         <MangaCharacters />
       </AppHeader>
     </AppContainer>
