@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchBar from "./search-bar/SearchBar";
 import CharactersShowcase from "./characters-showcase/CharactersShowcase";
+import MangaItem from "./manga-item/MangaItem";
 import { Typography } from '@material-ui/core';
 import { search } from "../backend"
 import { SearchResult } from '../models/SearchResponse';
@@ -50,12 +51,13 @@ function App() {
   }, [searchQuery])
 
   const hasResults = (searchResults && searchResults?.length > 0)
+  const firstResult = searchResults && searchResults[0]
 
   return (
     <AppContainer>
       <AppHeader>
         <SearchBar query={searchQuery} onChange={onSearchChanged} />
-        { hasResults ? <div></div> : <StyledCharactersShowcase /> }
+        { hasResults ? <MangaItem manga={firstResult} /> : <StyledCharactersShowcase /> }
         <Typography variant="overline">
           Manga Navigator for MAL
         </Typography>
