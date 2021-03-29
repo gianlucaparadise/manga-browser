@@ -5,6 +5,17 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { SearchResult } from '../../models/SearchResponse';
+import styled from 'styled-components';
+import { device } from "../styling";
+
+const MangaCard = styled(Card)`
+    margin: 10px;
+    width: 20vw;
+    
+    @media ${device.mobile} {
+        width: 80vw;
+    }
+`
 
 interface Props {
     manga: SearchResult
@@ -13,7 +24,7 @@ interface Props {
 const MangaItem: FunctionComponent<Props> = (props) => {
 
     return (
-        <Card>
+        <MangaCard>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -30,7 +41,7 @@ const MangaItem: FunctionComponent<Props> = (props) => {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-        </Card>
+        </MangaCard>
     )
 }
 

@@ -2,21 +2,16 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchBar from "./search-bar/SearchBar";
 import CharactersShowcase from "./characters-showcase/CharactersShowcase";
-import MangaItem from "./manga-item/MangaItem";
+import MangaItemList from "./manga-item-list/MangaItemList";
 import { Typography } from '@material-ui/core';
 import { search } from "../backend"
 import { SearchResult } from '../models/SearchResponse';
 
 const AppContainer = styled.div`
   text-align: center;
-`
-
-const StyledCharactersShowcase = styled(CharactersShowcase)`
-  /* margin: calc(10px + 5vmin); */
-`
-
-const AppHeader = styled.header`
   background-color: #DEC28A;
+  padding-top: 10px;
+  padding-bottom: 10px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,6 +19,10 @@ const AppHeader = styled.header`
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+`
+
+const StyledCharactersShowcase = styled(CharactersShowcase)`
+  /* margin: calc(10px + 5vmin); */
 `
 
 function App() {
@@ -51,17 +50,14 @@ function App() {
   }, [searchQuery])
 
   const hasResults = (searchResults && searchResults?.length > 0)
-  const firstResult = searchResults && searchResults[0]
 
   return (
     <AppContainer>
-      <AppHeader>
-        <SearchBar query={searchQuery} onChange={onSearchChanged} />
-        { hasResults ? <MangaItem manga={firstResult} /> : <StyledCharactersShowcase /> }
-        <Typography variant="overline">
-          Manga Navigator for MAL
-        </Typography>
-      </AppHeader>
+      <SearchBar query={searchQuery} onChange={onSearchChanged} />
+      { hasResults ? <MangaItemList itemList={searchResults} /> : <StyledCharactersShowcase />}
+      <Typography variant="overline">
+        Manga Navigator for MAL
+      </Typography>
     </AppContainer>
   );
 }
