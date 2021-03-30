@@ -37,15 +37,22 @@ const CharactersShowcase = () => {
         setIsPlaying(!isPlaying)
     }
 
+    const getAndSetImage = async () => {
+        const newImgUrl = await getRandomCharacterImage()
+        setImgUrl(newImgUrl)
+    }
+
     useEffect(() => {
         let cleanupFunction = () => { }
 
+        if (imgUrl === "") {
+            console.log("Getting initial image")
+            getAndSetImage()
+        }
+
         if (isPlaying) {
             console.log("Carousel started")
-            const carousel = setTimeout(async () => {
-                const newImgUrl = await getRandomCharacterImage()
-                setImgUrl(newImgUrl)
-            }, 3000)
+            const carousel = setTimeout(getAndSetImage, 3000)
 
             cleanupFunction = () => {
                 console.log("Cancelling carousel")
@@ -54,7 +61,7 @@ const CharactersShowcase = () => {
         }
 
         return cleanupFunction
-    })
+    }, [setImgUrl, isPlaying, imgUrl])
 
     return (
         <FixedImg onClick={togglePlaying} src={imgUrl} alt="Random Manga Character" />
