@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import SearchBar from "./search-bar/SearchBar";
-import CharactersShowcase from "./characters-showcase/CharactersShowcase";
-import MangaItemList from "./manga-item-list/MangaItemList";
+import Main from "./main/Main";
 import { Typography } from '@material-ui/core';
-import { search } from "../backend"
-import { SearchResult } from '../models/SearchResponse';
+import { BrowserRouter as Router } from "react-router-dom"
 
 const AppContainer = styled.div`
   text-align: center;
@@ -21,40 +18,12 @@ const AppContainer = styled.div`
   color: white;
 `
 
-const StyledCharactersShowcase = styled(CharactersShowcase)`
-  /* margin: calc(10px + 5vmin); */
-`
-
 function App() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [searchResults, setSearchResult] = useState<SearchResult[]>([])
-
-  const onSearchChanged = (query: string) => {
-    console.log(query)
-    setSearchQuery(query)
-  }
-
-  useEffect(() => {
-    const performSearchAndUpdateResults = async () => {
-      console.log(`Searching with query ${searchQuery}`)
-      if (searchQuery && searchQuery.length > 3) {
-        const mangaResults = await search(searchQuery)
-        console.log(mangaResults.results)
-        setSearchResult(mangaResults.results || [])
-      }
-      else if (!searchQuery || searchQuery.length === 0) {
-        setSearchResult([])
-      }
-    }
-    performSearchAndUpdateResults()
-  }, [searchQuery])
-
-  const hasResults = (searchResults && searchResults?.length > 0)
-
   return (
     <AppContainer>
-      <SearchBar query={searchQuery} onChange={onSearchChanged} />
-      { hasResults ? <MangaItemList itemList={searchResults} /> : <StyledCharactersShowcase />}
+      <Router>
+        <Main />
+      </Router>
       <Typography variant="overline">
         Manga Navigator for MAL
       </Typography>
