@@ -18,13 +18,21 @@ const MangaCard = styled(Card)`
 `
 
 interface Props {
-    manga: SearchResult
+    manga: SearchResult,
+    onClick?: (manga: SearchResult) => void
 }
 
 const MangaItem: FunctionComponent<Props> = (props) => {
 
+    const onClicked = () => {
+        if (props.onClick) {
+            props.onClick(props.manga)
+        }
+    }
+
+
     return (
-        <MangaCard>
+        <MangaCard onClick={onClicked}>
             <CardActionArea>
                 <CardMedia
                     component="img"

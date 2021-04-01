@@ -18,12 +18,20 @@ const ListContainer = styled.div`
 `
 
 interface Props {
-    itemList: SearchResult[]
+    itemList: SearchResult[];
+    onItemSelected?: (item: SearchResult) => void
 }
 
 const MangaItemList: FunctionComponent<Props> = (props) => {
+
+    const onItemClicked = (item: SearchResult) => {
+        if (props.onItemSelected) {
+            props.onItemSelected(item)
+        }
+    }
+
     const itemListView = props.itemList.map((item) => {
-        return (<MangaItem manga={item} key={item.mal_id} />)
+        return (<MangaItem manga={item} key={item.mal_id} onClick={onItemClicked} />)
     })
 
     return (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SearchBar from "../search-bar/SearchBar";
 import CharactersShowcase from "../characters-showcase/CharactersShowcase";
 import MangaItemList from "../manga-item-list/MangaItemList";
+import MangaDetail from "../manga-detail/MangaDetail";
 import { search } from "../../backend"
 import { SearchResult } from '../../models/SearchResponse';
 import { Route, Switch, useLocation, useHistory } from "react-router-dom"
@@ -33,7 +34,10 @@ const Main = () => {
             const queryString = new URLSearchParams({ q: query }).toString()
             history.replace(`/search?${queryString}`)
         }
-        setSearchQuery(query)
+    }
+
+    const onItemSelected = (item: SearchResult) => {
+        history.push(`/manga/${item.mal_id}`)
     }
 
     return (
@@ -44,8 +48,10 @@ const Main = () => {
                     <CharactersShowcase />
                 </Route>
                 <Route path="/search">
-                    {/* <div>Search Results</div> */}
-                    <MangaItemList itemList={searchResults} />
+                    <MangaItemList itemList={searchResults} onItemSelected={onItemSelected} />
+                </Route>
+                <Route path="/manga/:id">
+                    <MangaDetail />
                 </Route>
             </Switch>
         </>
