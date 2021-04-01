@@ -9,21 +9,8 @@ import { Route, Switch, useLocation, useHistory } from "react-router-dom"
 const Main = () => {
     const location = useLocation()
     const history = useHistory()
-    const urlQuery = new URLSearchParams(location.search).get("q") || ""
-    const [searchQuery, setSearchQuery] = useState(urlQuery)
+    const searchQuery = new URLSearchParams(location.search).get("q") || ""
     const [searchResults, setSearchResult] = useState<SearchResult[]>([])
-
-    console.log(`UrlQuery: ${urlQuery} searchQuery: ${searchQuery}`)
-
-    useEffect(() => {
-        if (searchQuery === "") {
-            history.push("/")
-        }
-        else if (urlQuery !== searchQuery) {
-            const queryString = new URLSearchParams({ q: searchQuery }).toString()
-            history.replace(`/search?${queryString}`)
-        }
-    }, [searchQuery, history, urlQuery])
 
     useEffect(() => {
         const performSearchAndUpdateResults = async () => {
@@ -39,6 +26,13 @@ const Main = () => {
     }, [searchQuery, setSearchResult])
 
     const onSearchChanged = (query: string) => {
+        if (query === "") {
+            history.push("/")
+        }
+        else {
+            const queryString = new URLSearchParams({ q: query }).toString()
+            history.replace(`/search?${queryString}`)
+        }
         setSearchQuery(query)
     }
 
