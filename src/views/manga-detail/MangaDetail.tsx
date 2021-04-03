@@ -1,12 +1,14 @@
 import { getMangaDetail } from "../../backend"
 import { useParams } from "react-router-dom"
-import React, { useEffect, useState } from "react";
-import { MangaDetail as MangaDetailModel } from "../../models/MangaDetail";
+import React, { useEffect } from "react"
+import { useAppSelector, useAppDispatch } from "../../store";
+import { selectMangaDetail, upsertMangaDetail } from "../../store/mangaDetail/mangaDetailSlice"
 import AuthorAvatar from "../author-avatar/AuthorAvatar"
 import { Chip, Paper, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import { device } from "../styling";
 
+//#region Css
 const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -66,6 +68,7 @@ const AuthorsContainer = styled.div`
 const AuthorChip = styled(Chip)`
     margin: 5px;
 `
+//#endregion
 
 interface UrlParams {
     /**
@@ -76,16 +79,18 @@ interface UrlParams {
 
 const MangaDetail = () => {
     const { id }: UrlParams = useParams()
-    const [mangaDetail, setMangaDetail] = useState<MangaDetailModel>({})
+    const mangaDetailsMap = useAppSelector(selectMangaDetail)
+    const mangaDetail = mangaDetailsMap[id] || {}
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         const getMangaDetailAndUpdate = async () => {
             const manga = await getMangaDetail(id)
-            setMangaDetail(manga)
+            dispatch(upsertMangaDetail(manga))
         }
 
         getMangaDetailAndUpdate()
-    }, [id, setMangaDetail])
+    }, [id, dispatch])
 
     return (
         <MainContainer>

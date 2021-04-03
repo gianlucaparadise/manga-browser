@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Provider } from 'react-redux'
+import store from "../store";
 import Main from "./main/Main";
 import { Typography } from '@material-ui/core';
 import { BrowserRouter as Router } from "react-router-dom"
@@ -21,9 +23,11 @@ const AppContainer = styled.div`
 function App() {
   return (
     <AppContainer>
-      <Router>
-        <Main />
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Main />
+        </Router>
+      </Provider>
       <Typography variant="overline">
         Manga Navigator for MAL
       </Typography>
