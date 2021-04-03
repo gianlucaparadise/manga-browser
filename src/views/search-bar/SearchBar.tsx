@@ -26,7 +26,7 @@ const SearchBar: FunctionComponent<Props> = function (props) {
 
     return (
         <SearchBarContainer>
-            <InputSearch type="search" placeholder="Search manga..." value={props.query} onChange={e => onInputChanged(e.target.value)} />
+            <InputSearch type="search" inputProps={{ "data-testid": "searchbar-input" }} placeholder="Search manga..." value={props.query} onChange={e => onInputChanged(e.target.value)} />
         </SearchBarContainer>
     );
 }
