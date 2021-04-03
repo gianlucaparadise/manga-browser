@@ -2,6 +2,7 @@ import { getMangaDetail } from "../../backend"
 import { useParams } from "react-router-dom"
 import React, { useEffect, useState } from "react";
 import { MangaDetail as MangaDetailModel } from "../../models/MangaDetail";
+import AuthorAvatar from "../author-avatar/AuthorAvatar"
 import { Chip, Paper, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import { device } from "../styling";
@@ -95,7 +96,9 @@ const MangaDetail = () => {
                 <Cover elevation={3} src={mangaDetail.image_url} />
                 <DetailContainer>
                     <AuthorsContainer>
-                        {mangaDetail.authors?.map(a => <AuthorChip label={a.name} key={a.mal_id} />)}
+                        {mangaDetail.authors?.map(a => (
+                            <AuthorChip avatar={<AuthorAvatar author={a} />} label={a.name} key={a.mal_id} />
+                        ))}
                     </AuthorsContainer>
                     <SynopsisBox>
                         <Typography variant="body1">
