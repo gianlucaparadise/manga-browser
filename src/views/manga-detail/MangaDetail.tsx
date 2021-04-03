@@ -1,8 +1,8 @@
-import { getMangaDetail } from "../../backend"
+// import { getMangaDetail } from "../../backend"
 import { useParams } from "react-router-dom"
 import React, { useEffect } from "react"
 import { useAppSelector, useAppDispatch } from "../../store";
-import { selectMangaDetail, upsertMangaDetail } from "../../store/mangaDetail/mangaDetailSlice"
+import { selectMangaDetail, getMangaDetail } from "../../store/mangaDetail/mangaDetailSlice"
 import AuthorAvatar from "../author-avatar/AuthorAvatar"
 import { Chip, Paper, Typography } from "@material-ui/core";
 import styled from "styled-components";
@@ -85,8 +85,9 @@ const MangaDetail = () => {
 
     useEffect(() => {
         const getMangaDetailAndUpdate = async () => {
-            const manga = await getMangaDetail(id)
-            dispatch(upsertMangaDetail(manga))
+            // const manga = await getMangaDetail(id)
+            // dispatch(upsertMangaDetail(manga))
+            dispatch(getMangaDetail(id))
         }
 
         getMangaDetailAndUpdate()
