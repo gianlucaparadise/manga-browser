@@ -49,6 +49,7 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.9",
+    "msw": "^0.28.1",
     "redux-devtools": "^3.7.0"
   }
 }

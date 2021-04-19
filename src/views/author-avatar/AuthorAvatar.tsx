@@ -16,14 +16,19 @@ const AuthorAvatar = (props: Props) => {
     useEffect(() => {
         const getAuthorAvatarAndUpdate = async () => {
             if (!id) return
-            const authorPictures = await getAuthorPictures(id)
-            if (!authorPictures.pictures || authorPictures.pictures.length <= 0) return
 
-            const picture = authorPictures.pictures.find((p) => p.small)
-            const pictureUrl = picture?.small
-            if (!pictureUrl) return
+            try {
+                const authorPictures = await getAuthorPictures(id)
+                if (!authorPictures.pictures || authorPictures.pictures.length <= 0) return
 
-            setAvatarUrl(pictureUrl)
+                const picture = authorPictures.pictures.find((p) => p.small)
+                const pictureUrl = picture?.small
+                if (!pictureUrl) return
+
+                setAvatarUrl(pictureUrl)
+            } catch (error) {
+                console.error(`Error while getting author pictures`, error)
+            }
         }
         getAuthorAvatarAndUpdate()
     }, [id, setAvatarUrl])

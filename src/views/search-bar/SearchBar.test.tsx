@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 import { act } from 'react-dom/test-utils';
 import { unmountComponentAtNode } from 'react-dom';
 
-let container = null;
+let container: any = null;
 beforeEach(() => {
     // setup a DOM element as a render target
     container = document.createElement("div");
